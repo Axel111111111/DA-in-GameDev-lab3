@@ -59,29 +59,29 @@
 Шаг 3 В корень проекта добавляум файл конфигурации нейронной сети, доступный в папке с файлами проекта. Запускаем  ml-агента. Запускаем сцену в Unity
 и проверяем работу ML-Agent’a.
 
-     behaviors:
-  RollerBall:
-    trainer_type: ppo
-    hyperparameters:
-      batch_size: 10
-      buffer_size: 100
-      learning_rate: 3.0e-4
-      beta: 5.0e-4
-      epsilon: 0.2
-      lambd: 0.99
-      num_epoch: 3
-      learning_rate_schedule: linear
-    network_settings:
-      normalize: false
-      hidden_units: 128
-      num_layers: 2
-    reward_signals:
-      extrinsic:
-        gamma: 0.99
-        strength: 1.0
-    max_steps: 500000
-    time_horizon: 64
-    summary_freq: 10000
+        behaviors:
+        RollerBall:
+         trainer_type: ppo
+         hyperparameters:
+           batch_size: 10
+           buffer_size: 100
+           learning_rate: 3.0e-4
+           beta: 5.0e-4
+           epsilon: 0.2
+           lambd: 0.99
+           num_epoch: 3
+           learning_rate_schedule: linear
+         network_settings:
+           normalize: false
+           hidden_units: 128
+           num_layers: 2
+         reward_signals:
+           extrinsic:
+             gamma: 0.99
+             strength: 1.0
+         max_steps: 500000
+         time_horizon: 64
+         summary_freq: 10000
 
 Шаг 4 Делаем 3, 9, 27 копий модели «Плоскость-Сфера-Куб», запускаем симуляцию сцены и наблюдаем за результатом обучения модели. После завершения 
 обучения проверяем работу модели.
@@ -99,28 +99,28 @@
 нашли информацию о компонентах Decision Requester, Behavior Parameters, добавленных на сфере.
 
       behaviors: #cоздание списка "Модель поведения" дял разных агентов
-  RollerBall: #cоздание списка конкретного объекта
-    trainer_type: ppo #ppo - это алгоритм обучения с подкреплением от OpenAi
-    hyperparameters:
-      batch_size: 10 #количество опыта на каждоый итерации
-      buffer_size: 100 #колличество опыта которое необхдимо собрать для перехода к обучению или изучении модели
-      learning_rate: 3.0e-4 #скорость обучения
-      beta: 5.0e-4
-      epsilon: 0.2
-      lambd: 0.99
-      num_epoch: 3
-      learning_rate_schedule: linear #определение изменения скорости обучения с течением времени
-    network_settings:
-      normalize: false #к входным данным не применяется нормализация
-      hidden_units: 128 #количество нейронов в слоях нейронной сети
-      num_layers: 2 #количество слоев нейроной сети
-    reward_signals: #настройка сигналов вознаграждения
-      extrinsic:
-        gamma: 0.99
-        strength: 1.0 #коэффициент вознаграждения
-    max_steps: 500000 #количество шагов для завершения обучения
-    time_horizon: 64 #количество шагов для добавления в буфер опыта
-    summary_freq: 10000 #количество шагов для создавния и вывода статистикиобучения
+       RollerBall: #cоздание списка конкретного объекта
+         trainer_type: ppo #ppo - это алгоритм обучения с подкреплением от OpenAi
+         hyperparameters:
+           batch_size: 10 #количество опыта на каждоый итерации
+           buffer_size: 100 #колличество опыта которое необхдимо собрать для перехода к обучению или изучении модели
+           learning_rate: 3.0e-4 #скорость обучения
+           beta: 5.0e-4
+           epsilon: 0.2
+           lambd: 0.99
+           num_epoch: 3
+           learning_rate_schedule: linear #определение изменения скорости обучения с течением времени
+         network_settings:
+           normalize: false #к входным данным не применяется нормализация
+           hidden_units: 128 #количество нейронов в слоях нейронной сети
+           num_layers: 2 #количество слоев нейроной сети
+         reward_signals: #настройка сигналов вознаграждения
+           extrinsic:
+             gamma: 0.99
+             strength: 1.0 #коэффициент вознаграждения
+         max_steps: 500000 #количество шагов для завершения обучения
+         time_horizon: 64 #количество шагов для добавления в буфер опыта
+         summary_freq: 10000 #количество шагов для создавния и вывода статистикиобучения
     
 Decision Requester
 запрос на принятие решения вызывает CollectObservation, а затем получает последнее действие в OnActionReceived, основанное на этом новом собранном наблюдении. С действиями из TakeActionBetweenDecisions он только снова вызовет OnActionReceived без сбора новых наблюдений и выведет последнее действие, которое он получил от NN.
